@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from './features/appSlice';
 import { auth } from './firebase';
+import NewWorkout from './pages/NewWorkout';
 
 function App() {
   const user = useSelector(selectUser);
@@ -27,7 +28,7 @@ function App() {
         dispatch(logout());
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='app'>
@@ -38,6 +39,7 @@ function App() {
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Register} />
           <Route exact path='/' component={Homepage} />
+          <Route exact path='/newworkout' component={NewWorkout} />
         </Switch>
       </Router>
     </div>

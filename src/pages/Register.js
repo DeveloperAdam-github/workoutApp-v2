@@ -9,11 +9,12 @@ import { login } from '../features/appSlice';
 const Register = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [name, setName] = useState();
+  const [username, setUsername] = useState();
+  const [profilePic, setProfilePic] = useState();
   const dispatch = useDispatch();
 
   const signUp = () => {
-    if (!name) {
+    if (!username) {
       return alert('Please enter a full name');
     }
 
@@ -22,14 +23,16 @@ const Register = () => {
       .then((userAuth) => {
         userAuth.user
           .updateProfile({
-            displayName: name,
+            displayName: username,
+            photoURL: profilePic,
           })
           .then(() => {
             dispatch(
               login({
                 email: userAuth.user.email,
-                uid: userAuth.user.uid,
-                displayName: name,
+                id: userAuth.user.uid,
+                username: userAuth.user.displayName,
+                profilePic: userAuth.user.photoURL,
               })
             );
           })
@@ -50,9 +53,9 @@ const Register = () => {
             <input
               type='text'
               className='form__name'
-              placeholder='Name...'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              placeholder='Username...'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             {/* <p>Email Address:</p> */}
             <input
@@ -69,6 +72,12 @@ const Register = () => {
               placeholder='Password...'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              placeholder='Profile pic URL (optional)'
+              type='text'
+              value={profilePic}
+              onChange={(e) => setProfilePic(e.target.value)}
             />
             {/* <p>Repeat Password:</p> */}
             {/* <input

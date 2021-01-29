@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { logout, selectUser } from '../features/appSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { auth } from '../firebase';
 
 const Navbar = () => {
   const user = useSelector(selectUser);
@@ -19,6 +20,8 @@ const Navbar = () => {
 
   const signOut = () => {
     dispatch(logout());
+    auth.signOut();
+    setIsShowing(false);
   };
 
   return (
@@ -204,21 +207,38 @@ const Navbar = () => {
             </Button>
           </Link>
         </li>
-        <li>
-          <Button onClick={showMenu}>
-            <Link
-              to='/login'
+
+        {!user ? (
+          <li>
+            <Button onClick={showMenu}>
+              <Link
+                to='/login'
+                style={{
+                  textDecoration: 'none',
+                  color: 'orangered',
+                  fontFamily: 'Teko',
+                  fontSize: '40px',
+                }}
+              >
+                Login
+              </Link>
+            </Button>
+          </li>
+        ) : (
+          <li>
+            <Button
               style={{
-                textDecoration: 'none',
                 color: 'orangered',
+                textDecoration: 'none',
                 fontFamily: 'Teko',
                 fontSize: '40px',
               }}
+              onClick={signOut}
             >
-              Login
-            </Link>
-          </Button>
-        </li>
+              Sign out
+            </Button>
+          </li>
+        )}
         {/* {bikePicture} */}
       </div>
     </div>
