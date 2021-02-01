@@ -54,13 +54,27 @@ const NewWorkout = () => {
     setTimerOn(false);
   };
 
+  const exerciseBuilder = (formInputItem) => {
+    return {
+        exercise: formInputItem.exercise,
+        weight: formInputItem.weight,
+        reps: formInputItem.reps,
+        timestamp: Date.now()
+    };
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
+     const exercises = [];
+
+     inputFields.map((inputField) => {
+         exercises.push(exerciseBuilder(inputField));
+     });
+
+     console.log('exercises: ', exercises);
+
     db.collection('users').add({
-      exercise: inputFields,
-      weight: inputFields,
-      reps: inputFields,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        exercises
     });
   };
 
