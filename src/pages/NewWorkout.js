@@ -54,12 +54,12 @@ const NewWorkout = () => {
     setTimerOn(false);
   };
 
-  const onSubmit = (formData) => {
-    console.log(formData);
+  const onSubmit = (e) => {
+    e.preventDefault();
     db.collection('users').add({
-      exercise: formData.exercise,
-      weight: formData.weight,
-      reps: formData.reps,
+      exercise: inputFields,
+      weight: inputFields,
+      reps: inputFields,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
   };
@@ -90,7 +90,7 @@ const NewWorkout = () => {
   return (
     <div className='newWorkout'>
       <div className='newWorkout__container'>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <div className='newWorkout__top'>
             <Button
               onClick={toggle}
@@ -127,7 +127,6 @@ const NewWorkout = () => {
                 name='newWorkout'
                 type='text'
                 placeholder='New Workout..'
-                ref={register({ required: true })}
               />
             </p>
 
@@ -170,7 +169,6 @@ const NewWorkout = () => {
                   onChange={(e) => handleChangeInput(inputField.id, e)}
                   type='text'
                   placeholder='Bench Press'
-                  ref={register({ required: true })}
                 />
               </div>
               <div className='newWorkout__weight'>
@@ -180,7 +178,6 @@ const NewWorkout = () => {
                   onChange={(e) => handleChangeInput(inputField.id, e)}
                   type='text'
                   placeholder='100'
-                  ref={register({ required: true })}
                 />
               </div>
               <div className='newWorkout__reps'>
@@ -190,7 +187,6 @@ const NewWorkout = () => {
                   onChange={(e) => handleChangeInput(inputField.id, e)}
                   type='text'
                   placeholder='10'
-                  ref={register({ required: true })}
                 />
               </div>
               <Checkbox className='newWorkout__checkbox' />
