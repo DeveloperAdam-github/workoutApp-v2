@@ -12,6 +12,7 @@
   width: 70vw;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
   /* position: relative; */
 }
 
@@ -58,8 +59,93 @@
   align-items: center;
 }
 
-.newWorkout__exercises {
+.newWorkout__exercisesTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #40a5f3;
+  border-radius: 55px;
+  align-items: center;
+  opacity: 0.6;
+  margin-bottom: 20px;
   margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+  height: 30px;
+}
+
+@media screen and (max-width: 770px) {
+  .newWorkout__exercisesTitle {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+
+.newWorkout__exercises {
+  display: flex;
+  float: row;
+  justify-content: space-around;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+}
+
+.newWorkout__checkbox {
+  color: #40a5f3 !important;
+}
+
+.newWorkout__clear {
+  color: #eb6f79 !important;
+  font-weight: 900 !important;
+}
+
+.newWorkout__exercise > input {
+  width: 100px;
+  display: flex;
+  background-color: #ebf4ff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 900;
+}
+
+.newWorkout__exercise > input::placeholder {
+  opacity: 0.2;
+}
+
+.newWorkout__weight > input {
+  width: 45px;
+  display: flex;
+  background-color: #ebf4ff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 900;
+}
+.newWorkout__weight > input::placeholder {
+  opacity: 0.2;
+}
+
+.newWorkout__reps > input {
+  width: 45px;
+  display: flex;
+  background-color: #ebf4ff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 900;
+}
+.newWorkout__reps > input::placeholder {
+  opacity: 0.2;
 }
 
 .newWorkout__footer {
@@ -69,4 +155,14 @@
   align-items: center;
   margin-top: 40px;
   justify-content: end;
+  text-align: center;
+}
+
+.newWorkout__footer__popup > input {
+  border: none;
+  outline: none;
+}
+.newWorkout__footer__popup > input:focus {
+  border: none;
+  outline: none;
 }
