@@ -56,11 +56,13 @@ const NewWorkout = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    db.collection('users').add({
-      exercise: inputFields,
-      weight: inputFields,
-      reps: inputFields,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    inputFields.map((workout) => {
+      db.collection('users').add({
+        exercise: workout.exercise,
+        weight: workout.weight,
+        reps: workout.reps,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      });
     });
   };
 
