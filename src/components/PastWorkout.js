@@ -1,7 +1,7 @@
 import React from 'react';
 import './pastWorkout.css';
 
-const PastWorkout = ({ title, time, date }) => {
+const PastWorkout = ({ exercise, weight, reps, title, timestamp }) => {
   return (
     <div className='pastWorkout'>
       <div className='pastWorkout__top'>
@@ -10,14 +10,13 @@ const PastWorkout = ({ title, time, date }) => {
         </p>
       </div>
       <div className='pastWorkout__middle'>
-        <p>Length: {time}</p>
-        <p>{date}</p>
+        <p>Length:</p>
+        <p>{timestamp}</p>
       </div>
       <div className='pastWorkout__bottom'>
-        <p>Bench press 5 reps 100kg</p>
-        <p>Bench press 5 reps 100kg</p>
-        <p>Bench press 5 reps 100kg</p>
-        <p>Bench press 5 reps 100kg</p>
+        <p>{exercise}:</p>
+        <p>{weight} X </p>
+        <p>{reps}</p>
       </div>
     </div>
   );

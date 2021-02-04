@@ -1,9 +1,9 @@
 import { Avatar, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Homepage.css';
 import google from '../assets/images/googleLogo.jpg';
-import { auth, provider } from '../firebase';
+import { auth, db, provider } from '../firebase';
 import { login, selectUser } from '../features/appSlice';
 import RightArrow from '@material-ui/icons/ArrowRightAltOutlined';
 import AddIcon from '@material-ui/icons/Add';
@@ -14,6 +14,21 @@ import PastWorkout from '../components/PastWorkout';
 const Homepage = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const [pastWorkouts, setPastWorkouts] = useState([]);
+
+  useEffect(() => {
+    db.collection('workouts')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) =>
+        setPastWorkouts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+    console.log(setPastWorkouts.doc);
+  }, []);
 
   const signIn = () => {
     auth
@@ -85,6 +100,20 @@ const Homepage = () => {
                   </Link>
                 </div>
                 <div className='homepage__pastWorkouts'>
+                  {pastWorkouts.map(
+                    ({ id, data: { timestamp, exercise, weight, reps } }) => (
+                      <PastWorkout
+                        id={id}
+                        key={id}
+                        exercise={exercise}
+                        weight={weight}
+                        reps={reps}
+                        timestamp={new Date(
+                          timestamp?.seconds * 1000
+                        ).toUTCString()}
+                      />
+                    )
+                  )}
                   <PastWorkout
                     title='Squat day'
                     time='30:32'
@@ -96,7 +125,7 @@ const Homepage = () => {
                     date='11/1/2021'
                   />
                   <PastWorkout title='OHP day' time='45:32' date='18/1/2021' />
-                  <PastWorkout title='Deadlift day' />
+                  {/* <PastWorkout title='Deadlift day' />
                   <PastWorkout title='Cardio' />
                   <PastWorkout title='Bench day' />
                   <PastWorkout title='Bench day' />
@@ -104,7 +133,7 @@ const Homepage = () => {
                   <PastWorkout title='Bench day' />
                   <PastWorkout title='Bench day' />
                   <PastWorkout title='Bench day' />
-                  <PastWorkout title='Bench day' />
+                  <PastWorkout title='Bench day' /> */}
                 </div>
               </div>
             </div>
