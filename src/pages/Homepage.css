@@ -1,0 +1,133 @@
+.homepage {
+  height: 100vh;
+  background-color: transparent;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.homepage__container {
+  height: 100vh;
+  background-color: transparent;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: auto;
+  opacity: 1;
+}
+
+.homepage__loginButton {
+  background-color: white !important;
+  display: flex;
+  position: relative;
+  width: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -70vh;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.homepage__loginButton2 {
+  background-color: white !important;
+  color: 'orangered' !important;
+  display: flex;
+  position: relative;
+  width: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -58vh;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .homepage__loginButton {
+    bottom: -65%;
+  }
+  .homepage__loginButton2 {
+    bottom: -50%;
+  }
+}
+
+.homepage__welcome {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.homepage__welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid whitesmoke;
+  height: 100vh;
+  width: 1200px;
+  background-color: white;
+  padding: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .homepage__welcomeContainer {
+    width: 370px;
+    border-radius: 3px;
+  }
+}
+
+.homepage__topInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.homepage__avatar {
+  height: 45px !important;
+  width: 45px !important;
+  margin-right: 15px !important;
+}
+
+.homepage__welcomeTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  font-size: 19px;
+}
+
+.newWorkout__button {
+  width: 200px !important;
+  border-radius: 50px !important;
+  background-color: orangered !important;
+  color: white !important;
+}
+
+.homepage__pastWorkouts {
+  height: 80vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+  overflow: scroll;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .homepage__pastWorkouts {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 1160px) and (min-width: 770px) {
+  .homepage__pastWorkouts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
