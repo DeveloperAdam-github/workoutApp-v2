@@ -2,7 +2,6 @@ import React from 'react';
 import './pastWorkout.css';
 
 const PastWorkout = ({ workouts, timestamp }) => {
-    console.log('Workout: ',workouts);
   return (
     <div className='pastWorkout'>
       <div className='pastWorkout__top'>
