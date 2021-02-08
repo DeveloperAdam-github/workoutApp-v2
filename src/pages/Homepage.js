@@ -5,10 +5,9 @@ import './Homepage.css';
 import google from '../assets/images/googleLogo.jpg';
 import { auth, db, provider } from '../firebase';
 import { login, selectUser } from '../features/appSlice';
-import RightArrow from '@material-ui/icons/ArrowRightAltOutlined';
 import AddIcon from '@material-ui/icons/Add';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PastWorkout from '../components/PastWorkout';
 
 const Homepage = () => {
@@ -19,15 +18,14 @@ const Homepage = () => {
   useEffect(() => {
     db.collection('workouts')
       .orderBy('timestamp', 'desc')
-      .onSnapshot((snapshot) =>
+      .onSnapshot((snapshot) => {
         setPastWorkouts(
           snapshot.docs.map((doc) => ({
             id: doc.id,
             data: doc.data(),
           }))
-        )
-      );
-    console.log(pastWorkouts, 'homepage');
+        );
+      });
   }, []);
 
   const signIn = () => {
@@ -100,7 +98,7 @@ const Homepage = () => {
                   </Link>
                 </div>
                 <div className='homepage__pastWorkouts'>
-                  {pastWorkouts.map(({ id, data: { timestamp, workouts } }) => (
+                  {pastWorkouts.map(({ id, data: { workouts, timestamp } }) => (
                     <PastWorkout
                       id={id}
                       key={id}
@@ -108,29 +106,28 @@ const Homepage = () => {
                       timestamp={new Date(
                         timestamp?.seconds * 1000
                       ).toUTCString()}
-                      title='Bench Day'
                     />
                   ))}
-                  <PastWorkout
-                    title='Squat day'
-                    time='30:32'
-                    date='12/1/2021'
-                  />
-                  <PastWorkout
-                    title='Bench day'
-                    time='39:32'
-                    date='11/1/2021'
-                  />
-                  <PastWorkout title='OHP day' time='45:32' date='18/1/2021' />
-                  {/* <PastWorkout title='Deadlift day' />
-                  <PastWorkout title='Cardio' />
-                  <PastWorkout title='Bench day' />
-                  <PastWorkout title='Bench day' />
-                  <PastWorkout title='Bench day' />
-                  <PastWorkout title='Bench day' />
-                  <PastWorkout title='Bench day' />
-                  <PastWorkout title='Bench day' />
-                  <PastWorkout title='Bench day' /> */}
+                  {/*<PastWorkout*/}
+                  {/*  title='Squat day'*/}
+                  {/*  time='30:32'*/}
+                  {/*  date='12/1/2021'*/}
+                  {/*/>*/}
+                  {/*<PastWorkout*/}
+                  {/*  title='Bench day'*/}
+                  {/*  time='39:32'*/}
+                  {/*  date='11/1/2021'*/}
+                  {/*/>*/}
+                  {/*<PastWorkout title='OHP day' time='45:32' date='18/1/2021' />*/}
+                  {/*/!* <PastWorkout title='Deadlift day' />*/}
+                  {/*<PastWorkout title='Cardio' />*/}
+                  {/*<PastWorkout title='Bench day' />*/}
+                  {/*<PastWorkout title='Bench day' />*/}
+                  {/*<PastWorkout title='Bench day' />*/}
+                  {/*<PastWorkout title='Bench day' />*/}
+                  {/*<PastWorkout title='Bench day' />*/}
+                  {/*<PastWorkout title='Bench day' />*/}
+                  {/*<PastWorkout title='Bench day' /> *!/*/}
                 </div>
               </div>
             </div>
