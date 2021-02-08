@@ -70,7 +70,7 @@ const NewWorkout = () => {
       workouts.push(workoutBuilder(inputField));
     });
 
-    console.log('workouts: ', workouts);
+    // console.log('workouts: ', workouts);
 
     db.collection('workouts').add({
       workouts,

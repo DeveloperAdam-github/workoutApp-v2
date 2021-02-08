@@ -27,7 +27,7 @@ const Homepage = () => {
           }))
         )
       );
-    console.log(setPastWorkouts.doc);
+    console.log(pastWorkouts, 'homepage');
   }, []);
 
   const signIn = () => {
@@ -100,20 +100,17 @@ const Homepage = () => {
                   </Link>
                 </div>
                 <div className='homepage__pastWorkouts'>
-                  {pastWorkouts.map(
-                    ({ id, data: { timestamp, exercise, weight, reps } }) => (
-                      <PastWorkout
-                        id={id}
-                        key={id}
-                        exercise={exercise}
-                        weight={weight}
-                        reps={reps}
-                        timestamp={new Date(
-                          timestamp?.seconds * 1000
-                        ).toUTCString()}
-                      />
-                    )
-                  )}
+                  {pastWorkouts.map(({ id, data: { timestamp, workouts } }) => (
+                    <PastWorkout
+                      id={id}
+                      key={id}
+                      workouts={workouts}
+                      timestamp={new Date(
+                        timestamp?.seconds * 1000
+                      ).toUTCString()}
+                      title='Bench Day'
+                    />
+                  ))}
                   <PastWorkout
                     title='Squat day'
                     time='30:32'

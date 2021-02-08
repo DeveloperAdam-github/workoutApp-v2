@@ -1,12 +1,12 @@
 import React from 'react';
 import './pastWorkout.css';
 
-const PastWorkout = ({ exercise, weight, reps, title, timestamp }) => {
+const PastWorkout = ({ workouts, timestamp }) => {
   return (
     <div className='pastWorkout'>
       <div className='pastWorkout__top'>
         <p className='pastWorkout__title'>
-          <span className='chunky'>{title}</span>
+          <span className='chunky'>{workouts[0].exercise}</span>
         </p>
       </div>
       <div className='pastWorkout__middle'>
@@ -14,9 +14,14 @@ const PastWorkout = ({ exercise, weight, reps, title, timestamp }) => {
         <p>{timestamp}</p>
       </div>
       <div className='pastWorkout__bottom'>
-        <p>{exercise}:</p>
-        <p>{weight} X </p>
-        <p>{reps}</p>
+        {workouts.map((workout) => (
+          <div>
+            <p>Exercise: {workout.exercise} </p>
+            <p>Reps: {workout.reps} </p>
+            <p>Weight: {workout.weight} </p>
+            <p> -- </p>
+          </div>
+        ))}
       </div>
     </div>
   );

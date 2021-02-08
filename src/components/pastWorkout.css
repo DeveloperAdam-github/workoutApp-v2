@@ -40,5 +40,7 @@
 
 .pastWorkout__bottom {
   display: flex;
+  overflow-y: scroll;
+  height: 80%;
   flex-direction: column;
 }
