@@ -9,15 +9,20 @@ import AddIcon from '@material-ui/icons/Add';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { Link } from 'react-router-dom';
 import PastWorkout from '../components/PastWorkout';
+import { selectWorkoutId } from '../features/workoutSlice';
+import firebase from 'firebase';
 
 const Homepage = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [pastWorkouts, setPastWorkouts] = useState([]);
+  // const workoutId = useSelector(selectWorkoutId);
 
   useEffect(() => {
+    const userID = user ? user.id : 'no user';
     db.collection('workouts')
       .orderBy('timestamp', 'desc')
+      .where('user', '==', userID)
       .onSnapshot((snapshot) => {
         setPastWorkouts(
           snapshot.docs.map((doc) => ({
@@ -26,7 +31,21 @@ const Homepage = () => {
           }))
         );
       });
-  }, []);
+  }, [user, pastWorkouts, setPastWorkouts]);
+
+  // useEffect(() => {
+  //   db.collection('workouts')
+  //     .orderBy('timestamp', 'desc')
+  //     .where('user', '==', userID)
+  //     .onSnapshot((snapshot) => {
+  //       setPastWorkouts(
+  //         snapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       );
+  //     });
+  // }, [user]);
 
   const signIn = () => {
     auth
@@ -80,14 +99,14 @@ const Homepage = () => {
             <div className='homepage__welcome'>
               <div className='homepage__welcomeContainer'>
                 <div className='homepage__topInfo'>
-                  <p className='homepage__welcomeTitle'>
+                  <div className='homepage__welcomeTitle'>
                     {' '}
                     <Avatar
                       className='homepage__avatar'
                       src={user?.profilePic}
                     />{' '}
                     Hello {user?.username}
-                  </p>
+                  </div>
                   <Link to='/newworkout' style={{ textDecoration: 'none' }}>
                     <Button className='newWorkout__button'>
                       New Workout{' '}
@@ -98,16 +117,20 @@ const Homepage = () => {
                   </Link>
                 </div>
                 <div className='homepage__pastWorkouts'>
-                  {pastWorkouts.map(({ id, data: { workouts, timestamp } }) => (
-                    <PastWorkout
-                      id={id}
-                      key={id}
-                      workouts={workouts}
-                      timestamp={new Date(
-                        timestamp?.seconds * 1000
-                      ).toUTCString()}
-                    />
-                  ))}
+                  {pastWorkouts.map(
+                    ({ id, data: { workouts, timestamp, length, user } }) => (
+                      <PastWorkout
+                        id={id}
+                        key={id}
+                        length={length}
+                        workouts={workouts}
+                        user={user}
+                        timestamp={new Date(
+                          timestamp?.seconds * 1000
+                        ).toUTCString()}
+                      />
+                    )
+                  )}
                   {/*<PastWorkout*/}
                   {/*  title='Squat day'*/}
                   {/*  time='30:32'*/}

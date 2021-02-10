@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from './features/appSlice';
 import { auth } from './firebase';
 import NewWorkout from './pages/NewWorkout';
+import About from './pages/About';
 
 function App() {
   const user = useSelector(selectUser);
@@ -38,6 +39,7 @@ function App() {
           // if user is logged in show Login, else show homepage
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Register} />
+          <Route exact path='/about' component={About} />
           <Route exact path='/' component={Homepage} />
           <Route exact path='/newworkout' component={NewWorkout} />
         </Switch>

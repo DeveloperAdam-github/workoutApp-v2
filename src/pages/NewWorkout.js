@@ -8,11 +8,19 @@ import { v4 as uuidv4 } from 'uuid';
 import ClearIcon from '@material-ui/icons/Clear';
 import { db } from '../firebase';
 import firebase from 'firebase';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectWorkoutId } from '../features/workoutSlice';
+import { selectUser } from '../features/appSlice';
 
 const NewWorkout = () => {
   const [time, setTime] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
   const { register, handleSubmit, watch, errors } = useForm();
+  // const workoutId = useSelector(selectWorkoutId);
+  const user = useSelector(selectUser);
+
+  const history = useHistory();
 
   const [inputFields, setInputFields] = useState([
     {
@@ -64,7 +72,9 @@ const NewWorkout = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setTimerOn(false);
     const workouts = [];
+    const length = time;
 
     inputFields.map((inputField) => {
       workouts.push(workoutBuilder(inputField));
@@ -75,7 +85,10 @@ const NewWorkout = () => {
     db.collection('workouts').add({
       workouts,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      length,
+      user: user.id,
     });
+    history.push('/');
   };
 
   useEffect(() => {

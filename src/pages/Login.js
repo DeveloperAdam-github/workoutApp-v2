@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { auth } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/appSlice';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ const Login = () => {
           email: userAuth.user.email,
           username: userAuth.displayName,
           profilePic: userAuth.photoURL,
-          id: userAuth.uid,
+          id: userAuth.user.uid,
         })
       );
     });
@@ -57,6 +57,7 @@ const Login = () => {
               variant='outlined'
               value='button'
               onClick={loginToApp}
+              to='/'
             >
               Login
             </Button>
