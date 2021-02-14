@@ -187,26 +187,30 @@ const Navbar = () => {
             </Button>
           </Link>
         </li>
-        <li>
-          <Link
-            onClick={showMenu}
-            to='/signup'
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            <Button
+        {!user ? (
+          <li>
+            <Link
+              onClick={showMenu}
+              to='/signup'
               style={{
-                color: 'orangered',
                 textDecoration: 'none',
-                fontFamily: 'Teko',
-                fontSize: '40px',
               }}
             >
-              Sign Up
-            </Button>
-          </Link>
-        </li>
+              <Button
+                style={{
+                  color: 'orangered',
+                  textDecoration: 'none',
+                  fontFamily: 'Teko',
+                  fontSize: '40px',
+                }}
+              >
+                Sign Up
+              </Button>
+            </Link>
+          </li>
+        ) : (
+          <p></p>
+        )}
 
         {!user ? (
           <li>

@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { auth } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/appSlice';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
   const [email, setEmail] = useState();
@@ -12,6 +13,7 @@ const Register = () => {
   const [username, setUsername] = useState();
   const [profilePic, setProfilePic] = useState();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const signUp = () => {
     if (!username) {
@@ -39,6 +41,7 @@ const Register = () => {
           .catch((error) => alert(error));
       })
       .catch((error) => alert(error));
+    history.push('/');
   };
 
   return (
